@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { AUTH_TOKEN } from "../constants";
 import gql from "graphql-tag";
+import { Mutation } from "react-apollo";
 
 const SIGNUP_MUTATION = gql`
   mutation SignupMutation($email: String!, $password: String!, $name: String!) {
@@ -54,9 +55,17 @@ class Login extends Component {
           />
         </div>
         <div className="flex mt3">
-          <div className="pointer mr2 button" onClick={() => this._confirm()}>
-            {login ? "login" : "create account"}
-          </div>
+          <Mutation
+            mutation={login ? LOGIN_MUTATION : SIGNUP_MUTATION}
+            variables={{ email, password, name }}
+            onCompleted={data => this._confirm(data)}
+          >
+            {mutation => (
+              <div className="pointer mr2 button" onClick={mutation}>
+                {login ? "login" : "create account"}
+              </div>
+            )}
+          </Mutation>
           <div
             className="pointer button"
             onClick={() => this.setState({ login: !login })}
