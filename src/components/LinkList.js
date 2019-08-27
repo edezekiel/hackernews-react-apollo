@@ -44,7 +44,7 @@ class LinkList extends Component {
                   link={link}
                   index={index}
                   updateStoreAfterVote={this._updateCacheAfterVote}
-                />
+                  />
               ))}
             </div>
           );
@@ -54,13 +54,13 @@ class LinkList extends Component {
   }
 
   _updateCacheAfterVote = (store, createVote, linkId) => {
-    const data = store.readQuery({ query: FEED_QUERY });
-
-    const votedLink = data.feed.links.find(link => link.id === linkId);
-    votedLink.votes = createVote.link.votes;
-
-    store.writeQuery({ query: FEED_QUERY, data });
-  };
+    const data = store.readQuery({ query: FEED_QUERY })
+  
+    const votedLink = data.feed.links.find(link => link.id === linkId)
+    votedLink.votes = createVote.link.votes
+  
+    store.writeQuery({ query: FEED_QUERY, data })
+  }
 }
 
 export default LinkList;

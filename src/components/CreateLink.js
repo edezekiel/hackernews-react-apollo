@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 import { Mutation } from "react-apollo";
 import gql from "graphql-tag";
-import { FEED_QUERY } from './LinkList';
- 
+import { FEED_QUERY } from "./LinkList";
+
 const POST_MUTATION = gql`
   mutation PostMutation($description: String!, $url: String!) {
     post(description: $description, url: $url) {
